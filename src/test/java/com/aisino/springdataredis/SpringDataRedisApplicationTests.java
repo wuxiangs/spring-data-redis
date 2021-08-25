@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.*;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 public class SpringDataRedisApplicationTests {
@@ -173,6 +174,30 @@ public class SpringDataRedisApplicationTests {
 
         //删除数据
         opsForZSet.remove("score","张三");
+    }
+
+    //获取所有的key
+    @Test
+    public void testKeys(){
+        Set keys = redisTemplate.keys("*");
+        keys.forEach(System.out::println);
+    }
+
+    //设置失效时间
+    @Test
+    public void testExpire(){
+        ValueOperations ops = redisTemplate.opsForValue();
+        //添加key的时候 设置失效时间
+        ops.set("wx","哈哈哈",10, TimeUnit.SECONDS);
+
+        //获取失效时间
+        Long second = redisTemplate.getExpire("wx");
+        System.out.println(second);
+
+        //给已经存在的key设置失效时间
+        redisTemplate.expire("age",10,TimeUnit.SECONDS);
+
+
     }
 
 }
