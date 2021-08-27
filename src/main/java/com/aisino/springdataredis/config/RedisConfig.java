@@ -37,6 +37,7 @@ public class RedisConfig {
                 .sentinel("192.168.1.7",26379)
                 .sentinel("192.168.1.7",26380)
                 .sentinel("192.168.1.7",26381);
+        redisSentinelConfiguration.setPassword("123456");
         return redisSentinelConfiguration;
     }
 }
