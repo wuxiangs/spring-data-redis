@@ -3,7 +3,7 @@ server:
 spring:
   redis:
     host: 192.168.1.7
-    port: 6382
+    port: 6380
     password: 123456
     database: 0
     timeout: 10000
